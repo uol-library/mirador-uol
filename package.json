@@ -1,7 +1,7 @@
 {
   "name": "mirador-uol",
   "version": "0.0.1",
-  "description": "Mirador 4 custom build with various plugins",
+  "description": "Mirador 4 build for the University of Leeds",
   "keywords": [
     "IIIF",
     "Viewer",
@@ -16,6 +16,7 @@
   "license": "Apache-2.0",
   "author": "Peter Edwards <p.l.edwards@leeds.ac.uk>",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
