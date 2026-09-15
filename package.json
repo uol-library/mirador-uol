@@ -1,0 +1,39 @@
+{
+  "name": "mirador-uol",
+  "version": "0.0.1",
+  "description": "Mirador 4 custom build with various plugins",
+  "keywords": [
+    "IIIF",
+    "Viewer",
+    "manifest",
+    "image",
+    "service"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-uol:uol-library/mirador-uol.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Peter Edwards <p.l.edwards@leeds.ac.uk>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.11",
+    "@mui/system": "^7.3.11",
+    "mirador": "^4.2.4",
+    "mirador-downloaddialog": "^1.0.10",
+    "mirador-imagecropper": "^1.0.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-i18next": "^15.7.4"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
