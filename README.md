@@ -58,5 +58,5 @@ server-side component.
   installs and builds fine with older npm (just emits an `EBADENGINE` warning); upgrade
   npm if you want to silence that.
 - The initial bundle is large (~1.5 MB minified) because it includes all of MUI + all
-  of Mirador. If bundle size matters for your deployment, look into code-splitting via
+  of Mirador. This could be made more efficient by code-splitting using
   dynamic `import()` for windows/plugins you don't always need.
