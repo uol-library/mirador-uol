@@ -31,6 +31,9 @@ export default defineConfig({
           // Everything else from node_modules (openseadragon, redux, plugins, etc).
           return 'vendor';
         },
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`
       },
     },
   },
