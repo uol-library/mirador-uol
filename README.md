@@ -9,8 +9,6 @@ Mirador plugins only work with the **ES module** build of Mirador, not the plain
 UMD/CDN `<script>` embed — so a real build step (Vite here, per Mirador's own 
 recommendation) is required as soon as you want to load any plugins.
 
-
-
 ## Getting started
 
 ```bash
