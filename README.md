@@ -31,14 +31,15 @@ npm run preview  # serve the production build locally
 - **Download dialog behavior**: configure globally under `window.downloadDialog` or
   per-window under an individual window's `downloadDialog` key. Available options:
   `enabled` (bool, default `true`) and `dialogOpen` (bool, default `false`).
-- **Theming**: Mirador uses MUI's theme system — pass a `theme` key in `miradorConfig`.
-- **Other plugins**: install from npm, import, and add `...pluginName` to the plugins
-  array passed as the second argument to `Mirador.viewer(config, [...plugins])`.
-  You can combine multiple plugins by spreading each into that same array.
 - **Extending the download dialog itself**: the plugin exposes a `PluginHook` target
   and lets you wrap its `DownloadDialog` component with your own children — see the
   "Extending" section of the [plugin's README](https://github.com/dbmdz/mirador-downloaddialog#extending)
   for the two supported approaches.
+- **Theming**: Mirador uses MUI's theme system — pass a `theme` key in `miradorConfig`.
+- **Other plugins**: install from npm, import, and add `...pluginName` to the plugins
+  array passed as the second argument to `Mirador.viewer(config, [...plugins])`.
+  You can combine multiple plugins by spreading each into that same array. An example
+  has been added using this method ([mirador-imagecropper](https://github.com/dbmdz/mirador-imagecropper)).
 
 ## Deploying
 
