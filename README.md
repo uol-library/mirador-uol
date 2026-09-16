@@ -2,8 +2,10 @@
 
 A minimal custom distribution of the [Mirador](https://github.com/ProjectMirador/mirador) IIIF viewer,
 built with Vite and bundled with the
-[mirador-downloaddialog](https://github.com/dbmdz/mirador-downloaddialog) and 
-[mirador-imagecropper](https://github.com/dbmdz/mirador-imagecropper) plugins.
+[mirador-downloaddialog](https://github.com/dbmdz/mirador-downloaddialog), 
+[mirador-imagecropper](https://github.com/dbmdz/mirador-imagecropper), 
+[mirador-image-tools](https://github.com/ProjectMirador/mirador-image-tools) and
+[mirador-share](https://github.com/ProjectMirador/mirador-share-plugin) plugins.
 
 Mirador plugins only work with the **ES module** build of Mirador, not the plain 
 UMD/CDN `<script>` embed — so a real build step (Vite here, per Mirador's own 
@@ -44,6 +46,13 @@ npm run preview  # serve the production build locally
   crop-and-copy-URL tool to each window. Configure under `window.imageCropper` (global)
   or per-window. Options: `active`, `dialogOpen`, `enabled`, `roundingPrecision`,
   `showRightsInformation` — see the plugin's README for details.
+- **[mirador-image-tools](https://github.com/ProjectMirador/mirador-image-tools)** — 
+  adds image manipulation tools to the UI. Config options are `imageToolsEnabled` and
+  `imageToolsOpen` which are both set to `true` in this repo.
+- **[mirador-share-plugin](https://github.com/ProjectMirador/mirador-share-plugin)** — 
+  adds several options for sharing a resource. Configuration of this plugin is minimal
+  in this repo and documented in the plugin's 
+  [README](https://github.com/ProjectMirador/mirador-share-plugin/blob/main/README.md).
 - **Matomo tracking** (`src/matomo.js`) — a small custom integration, not an
   off-the-shelf plugin (none exists publicly for Mirador 4). It loads the Matomo
   tracker and subscribes to Mirador's Redux store to fire `trackEvent` calls on
