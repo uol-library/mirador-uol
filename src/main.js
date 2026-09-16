@@ -1,6 +1,8 @@
 import Mirador from 'mirador';
 import downloadDialogPlugin from 'mirador-downloaddialog';
 import imageCropperPlugin from 'mirador-imagecropper';
+import { miradorImageToolsPlugin } from 'mirador-image-tools';
+import miradorSharePlugins from 'mirador-share-plugin';
 import { initMatomo, trackMiradorEvents } from './matomo';
 
 // Base Mirador configuration.
@@ -19,6 +21,28 @@ const miradorConfig = {
       active: false,
       dialogOpen: false,
       showRightsInformation: true,
+    },
+    imageToolsEnabled: true,
+    imageToolsOpen: true,
+    miradorSharePlugin: {
+      iiifInfoLink: 'https://iiif.io',
+      embedOption: {
+        enabled: false,
+        // embedUrlReplacePattern: [
+        //   /.*\.edu\/(\w+)\/iiif\/manifest/,
+        //   'https://embed.stanford.edu/iframe?url=https://purl.stanford.edu/$1',
+        // ],
+        syncIframeDimensions: {
+          height: { param: 'maxheight' },
+        },
+      },
+      shareLink: {
+        enabled: false,
+        // manifestIdReplacePattern: [
+        //   /\/iiif\/manifest/,
+        //   '',
+        // ],
+      },
     },
   },
   windows: [
@@ -41,6 +65,8 @@ initMatomo({
 const { store } = Mirador.viewer(miradorConfig, [
   ...downloadDialogPlugin,
   ...imageCropperPlugin,
+  ...miradorImageToolsPlugin,
+  ...miradorSharePlugins,
 ]);
 
 // Wire up Matomo custom-event tracking against the live Mirador store.

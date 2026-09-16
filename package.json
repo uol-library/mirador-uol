@@ -29,7 +29,9 @@
     "@mui/system": "^7.3.11",
     "mirador": "^4.2.4",
     "mirador-downloaddialog": "^1.0.10",
+    "mirador-image-tools": "^1.0.0",
     "mirador-imagecropper": "^1.0.4",
+    "mirador-share-plugin": "^1.0.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-i18next": "^15.7.4"
