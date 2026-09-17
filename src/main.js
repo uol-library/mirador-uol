@@ -1,9 +1,9 @@
 import Mirador from 'mirador';
-import downloadDialogPlugin from 'mirador-downloaddialog';
+import downloadDialogPlugin from './plugins/downloadDialogExtraSizes';
 import imageCropperPlugin from 'mirador-imagecropper';
 import { miradorImageToolsPlugin } from 'mirador-image-tools';
 import miradorSharePlugins from 'mirador-share-plugin';
-import { initMatomo, trackMiradorEvents } from './matomo';
+import { initMatomo, trackMiradorEvents } from './plugins/matomo';
 
 // Base Mirador configuration.
 // Swap the sample manifest below for whatever IIIF content you want to ship with.
@@ -23,7 +23,7 @@ const miradorConfig = {
       showRightsInformation: true,
     },
     imageToolsEnabled: true,
-    imageToolsOpen: true,
+    imageToolsOpen: false,
     miradorSharePlugin: {
       iiifInfoLink: 'https://iiif.io',
       embedOption: {

@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  plugins: [react()],
   build: {
     // The 500kB default warning threshold is tuned for typical web apps.
     // Mirador's remaining large chunk is OpenSeadragon (deep-zoom rendering)
