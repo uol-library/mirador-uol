@@ -28,6 +28,7 @@ npm run preview  # serve the production build locally
 - `src/matomo.js` — loads the Matomo tracker and subscribes to Mirador's Redux 
   store to fire `trackEvent` calls on manifest loads (`OpenManifest`) and canvas 
   navigation (`ViewCanvas`).
+- `src/plugins/` — folder containing plugin files.
 - `package.json` — `mirador` and `mirador-downloaddialog` are pinned to the latest
   compatible major versions (Mirador 4.x, plugin 1.x, React 19, MUI 7).
 
@@ -62,11 +63,21 @@ npm run preview  # serve the production build locally
   manifest loads (`OpenManifest`) and canvas navigation (`ViewCanvas`). Set your real
   `matomoUrl` and `siteId` in `src/main.js`.
 - **Extra download sizes** (`plugins/downloadDialogExtraSizes.jsx`,
-  `plugins/ExtraDownloadSizes.jsx`). `mirador-downloaddialog` only lists image sizes present in each canvas's *main* IIIF Image API `info.json` `sizes` array (plus the canvas's own full/original size). `src/plugins/downloadDialogExtraSizes.jsx` follows the plugin's documented ["Extending > with the rendering of child components"](https://github.com/dbmdz/mirador-downloaddialog#extending)
-  pattern: it swaps in a wrapped `DownloadDialog` (keeping every other component
+  `plugins/ExtraDownloadSizes.jsx`). `mirador-downloaddialog` only lists image sizes 
+  present in each canvas's *main* IIIF Image API `info.json` `sizes` array (plus the 
+  canvas's own full/original size). `src/plugins/downloadDialogExtraSizes.jsx` follows 
+  the plugin's
+  [Extending documentation](https://github.com/dbmdz/mirador-downloaddialog#extending)
+  pattern. it swaps in a wrapped `DownloadDialog` (keeping every other component
   the plugin exports, e.g. the toolbar button, untouched) whose `children` render
   an "Thumbnails" section per canvas, built in `src/plugins/ExtraDownloadSizes.jsx`.
-  This component reads thumbnail sizes from the manifest, getting them for each canvas in its `sizes` array. Because the thumbnail service has its own separate image identifier from the main image service (e.g. a `/thumbs/` path vs `/image/` path), links are built directly from that service's own `id`, not from `canvas.getCanonicalImageUri()` (which only knows about the main image service). The component fetches the manifest JSON itself (via the `manifestUrl` prop the plugin already receives) and caches it per URL, since the shape needed (`thumbnail[i].service[j]`) isn't exposed through any canvas helper method
+  This component reads thumbnail sizes from the manifest, getting them for each canvas 
+  in its `sizes` array. Because the thumbnail service has its own separate image identifier 
+  from the main image service (e.g. a `/thumbs/` path vs `/image/` path), links are built 
+  directly from that service's own `id`, not from `canvas.getCanonicalImageUri()` (which 
+  only knows about the main image service). The component fetches the manifest JSON itself 
+  (via the `manifestUrl` prop the plugin already receives) and caches it per URL, since the 
+  shape needed (`thumbnail[i].service[j]`) isn't exposed through any canvas helper method.
 
 ## Deploying
 

@@ -3,7 +3,11 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Link from '@mui/material/Link';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import { ExtraDownloadSizes } from './ExtraDownloadSizes';
 
@@ -46,7 +50,7 @@ export const CustomDownloadDialog = ({
       open={dialogOpen}
       scroll="paper"
     >
-      <Typography component="h4" style={{ padding: '1rem 1rem 0' }}>
+      <Typography component="h3" style={{ padding: '1rem 1rem 0' }}>
         <Box fontWeight="fontWeightBold">Download options</Box>
       </Typography>
       <DialogContent dividers>
@@ -55,20 +59,36 @@ export const CustomDownloadDialog = ({
           manifestUrl={manifestUrl}
           visibleCanvases={visibleCanvases}
         />
-        <Box fontSize="0.75rem" sx={{ marginTop: '1rem' }}>
-          <Link href={manifestUrl} rel="noopener" target="_blank">
-            IIIF manifest
-          </Link>
-        </Box>
-        {seeAlso
-          .filter(({ format }) => format !== 'text/html')
-          .map(({ label, value }) => (
-            <Box fontSize="0.75rem" key={value}>
-              <Link href={value} rel="noopener" target="_blank">
-                {label}
-              </Link>
-            </Box>
-          ))}
+          <Card className="mb-3" key={`extra-sizes-seealso`} raised sx={{ marginTop: '1rem' }}>
+            <CardContent>
+              <Typography component="h5" style={{ textTransform: 'none' }} variant="h6">
+                <Box fontWeight="fontWeightBold">
+                  See Also
+                </Box>
+              </Typography>
+              <List>
+                <ListItem dense>
+                  <Box fontSize="0.75rem">
+                    <Link href={manifestUrl} rel="noopener" target="_blank">
+                      IIIF manifest
+                    </Link>
+                  </Box>
+                </ListItem>
+                
+                {seeAlso
+                  .filter(({ format }) => format !== 'text/html')
+                  .map(({ label, value }) => (
+                    <ListItem dense>
+                      <Box fontSize="0.75rem" key={value}>
+                        <Link href={value} rel="noopener" target="_blank">
+                          {label}
+                        </Link>
+                      </Box>
+                    </ListItem>
+                  ))}
+              </List>
+            </CardContent>
+          </Card>
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={close}>

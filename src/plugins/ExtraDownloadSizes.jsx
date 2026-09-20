@@ -43,6 +43,27 @@ function fetchManifestJson(manifestUrl) {
   return manifestCache.get(manifestUrl);
 }
 
+function adjustFullSize({ width, height }) {
+  // The "full/original" size is always available, but the built-in
+  // mirador-downloaddialog only lists it if it's larger than the largest
+  // size in the canvas's own info.json `sizes` array. Since we're not
+  // using that array at all, we need to make sure the full size is always
+  // larger than any of the extra sizes we list here, or else it won't be
+  // shown.
+  if (width > height && width > 5000) {
+    return { width: 5000, height: Math.round((height / width) * 5000) };
+  } else if (height > width && height > 5000) {
+    return { width: Math.round((width / height) * 5000), height: 5000 };
+  } else if (width === height && width > 5000) {
+    return { width: 5000, height: 5000 };
+  }
+  // We also need to ensure that the full size is at least 1px
+  // larger than the largest extra size, or else the built-in
+  // mirador-downloaddialog will omit it from the list of sizes. 
+  // So we add 1px to both width and height here.
+  return { width: width + 1, height: height + 1 };
+}
+
 export const ExtraDownloadSizes = ({ canvasLabel, manifestUrl, visibleCanvases = [] }) => {
   const [sizesByCanvasId, setSizesByCanvasId] = useState({});
   const theme = useTheme();
@@ -54,7 +75,7 @@ export const ExtraDownloadSizes = ({ canvasLabel, manifestUrl, visibleCanvases =
     fetchManifestJson(manifestUrl)
       .then((manifest) => {
         if (cancelled) return;
-
+        
         const byCanvasId = {};
         (manifest.items ?? []).forEach((item) => {
           const services = item.thumbnail?.[0]?.service ?? [];
@@ -79,6 +100,7 @@ export const ExtraDownloadSizes = ({ canvasLabel, manifestUrl, visibleCanvases =
   return (
     <>
       {visibleCanvases.map((canvas) => {
+        const fullSize = adjustFullSize({ width: canvas.getWidth(), height: canvas.getHeight() });
         const entry = sizesByCanvasId[canvas.id];
         if (!entry) return null;
 
@@ -88,6 +110,26 @@ export const ExtraDownloadSizes = ({ canvasLabel, manifestUrl, visibleCanvases =
 
         return (
           <Card className="mb-3" key={`extra-sizes-${canvas.id}`} raised>
+            <CardContent>
+              <Typography component="h5" style={{ textTransform: 'none' }} variant="h6">
+                <Box fontWeight="fontWeightBold">
+                  {canvasLabel(canvas.id)}
+                </Box>
+              </Typography>
+              <List>
+                <ListItem dense key={`${canvas.id}-full-${fullSize.width}x${fullSize.height}`}>
+                  <Box
+                    fontFamily={theme.typography.fontFamily ?? "sans-serif"}
+                    fontSize="0.75rem"
+                  >
+                    JPEG:{' '}
+                    <Link href={`${base.replace(/thumbs/, 'image')}/full/${fullSize.width},${fullSize.height}/0/default.jpg`} target="_blank">
+                      {fullSize.width} x {fullSize.height} pixels
+                    </Link>
+                  </Box>
+                </ListItem>
+              </List>
+            </CardContent>
             <CardContent>
               <Typography component="h5" style={{ textTransform: 'none' }} variant="h6">
                 <Box fontWeight="fontWeightBold">
