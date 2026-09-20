@@ -129,8 +129,6 @@ export const ExtraDownloadSizes = ({ canvasLabel, manifestUrl, visibleCanvases =
                   </Box>
                 </ListItem>
               </List>
-            </CardContent>
-            <CardContent>
               <Typography component="h5" style={{ textTransform: 'none' }} variant="h6">
                 <Box fontWeight="fontWeightBold">
                   Thumbnails for {canvasLabel(canvas.id)}
